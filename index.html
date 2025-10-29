@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="th" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าหลัก - โปรแกรมต่างๆ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-gradient {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .card-gradient-2 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .card-gradient-3 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+    </style>
+</head>
+<body class="h-full gradient-bg font-sans">
+    <main class="min-h-full flex flex-col items-center justify-center p-6">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-white mb-4">🎮 โปรแกรมต่างๆ</h1>
+            <p class="text-xl text-white opacity-90">เลือกโปรแกรมที่ต้องการใช้งาน</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
+            <!-- Game 3 Card -->
+            <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="card-gradient h-32 flex items-center justify-center">
+                    <span class="text-6xl">🃏</span>
+                </div>
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-3">เกม 3 การ์ด</h2>
+                    <p class="text-gray-600 mb-4">เกมการ์ดสุดสนุก เล่นง่าย ได้เงินจริง</p>
+                    <a href="Game3Card.html" 
+                       class="inline-block w-full text-center bg-gradient-to-r from-pink-500 to-red-500 text-white font-semibold py-3 px-6 rounded-lg hover:from-pink-600 hover:to-red-600 transition-all duration-300">
+                        เริ่มเล่น
+                    </a>
+                </div>
+            </div>
+
+            <!-- Program 2 (Coming Soon) -->
+            <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden opacity-75">
+                <div class="card-gradient-2 h-32 flex items-center justify-center">
+                    <span class="text-6xl">🚀</span>
+                </div>
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-3">โปรแกรมที่ 2</h2>
+                    <p class="text-gray-600 mb-4">กำลังพัฒนา... เร็วๆ นี้</p>
+                    <button class="w-full bg-gray-400 text-white font-semibold py-3 px-6 rounded-lg cursor-not-allowed" 
+                            disabled>
+                        เร็วๆ นี้
+                    </button>
+                </div>
+            </div>
+
+            <!-- Program 3 (Coming Soon) -->
+            <div class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden opacity-75">
+                <div class="card-gradient-3 h-32 flex items-center justify-center">
+                    <span class="text-6xl">⭐</span>
+                </div>
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-3">โปรแกรมที่ 3</h2>
+                    <p class="text-gray-600 mb-4">กำลังพัฒนา... เร็วๆ นี้</p>
+                    <button class="w-full bg-gray-400 text-white font-semibold py-3 px-6 rounded-lg cursor-not-allowed" 
+                            disabled>
+                        เร็วๆ นี้
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-16 text-center">
+            <p class="text-white opacity-75">© 2024 โปรแกรมต่างๆ - สร้างด้วยความใส่ใจ</p>
+        </footer>
+    </main>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'996091bce50aa1b1',t:'MTc2MTcxODg1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
