@@ -184,6 +184,16 @@
             content: '?';
         }
 
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
         .controls {
             text-align: center;
             margin-top: 30px;
@@ -295,7 +305,8 @@
    </div>
   </div>
   <script>
-        // Array ของลิงก์ภาพสำหรับเกม (5 ภาพ)
+        // 🖼️ ตำแหน่งสำหรับแก้ไขลิงก์ภาพ - Array ของลิงก์ภาพสำหรับเกม (5 ภาพ)
+        // ⚠️ สำคัญ: แทนที่ลิงก์ด้านล่างนี้ด้วยลิงก์ภาพของคุณเอง
         const GAME_IMAGES = [
             './image/Earth Tester.jpg', // ทดสอบหลักดิน
             './image/Insulation Resistance Tester.jpg', // ทดสอบฉนวน
@@ -303,6 +314,25 @@
             './image/Oscilloscope.jpg', // ออสซิโลสโคป
             './image/clipamp.jpg'  // คลิบแอมป์
         ];
+        
+        // 📝 วิธีการแก้ไขภาพ:
+        // 
+        // 🌐 สำหรับลิงก์ออนไลน์ (https://):
+        // 'https://example.com/image.jpg'
+        //
+        // 📁 สำหรับไฟล์ในโฟลเดอร์เดียวกัน:
+        // './images/dog.jpg'  หรือ  'images/dog.jpg'
+        //
+        // 🐙 สำหรับไฟล์ใน GitHub:
+        // 'https://raw.githubusercontent.com/username/repository/main/images/dog.jpg'
+        // 
+        // ตัวอย่าง GitHub URL:
+        // หากไฟล์อยู่ที่: https://github.com/myuser/mygame/blob/main/images/dog.jpg
+        // ใช้: 'https://raw.githubusercontent.com/myuser/mygame/main/images/dog.jpg'
+        //
+        // 1. แทนที่ลิงก์ในบรรทัดด้านบน
+        // 2. บันทึกและรีเฟรชหน้าเว็บ
+        // 3. กดปุ่ม "เกมใหม่" เพื่อใช้ภาพใหม่
 
         // ตัวแปรเกม
         let currentTurn = 'red'; // เริ่มต้นที่ฝั่งแดง
@@ -310,6 +340,7 @@
         let blueScore = 0;
         let currentGameImage = '';
         let revealedTiles = new Set();
+        let usedImages = new Set(); // เก็บภาพที่ใช้แล้ว
 
         // Default config
         const defaultConfig = {
@@ -320,9 +351,21 @@
 
         // ฟังก์ชันเริ่มต้นเกม
         function initializeGame() {
-            // สุ่มเลือกภาพจาก GAME_IMAGES
-            const randomIndex = Math.floor(Math.random() * GAME_IMAGES.length);
-            currentGameImage = GAME_IMAGES[randomIndex];
+            // หาภาพที่ยังไม่ได้ใช้
+            let availableImages = GAME_IMAGES.filter(img => !usedImages.has(img));
+            
+            // ถ้าใช้ภาพหมดแล้ว ให้รีเซ็ตและใช้ใหม่
+            if (availableImages.length === 0) {
+                usedImages.clear();
+                availableImages = [...GAME_IMAGES];
+            }
+            
+            // สุ่มเลือกภาพจากภาพที่ยังไม่ได้ใช้
+            const randomIndex = Math.floor(Math.random() * availableImages.length);
+            currentGameImage = availableImages[randomIndex];
+            
+            // เพิ่มภาพนี้เข้าไปในรายการที่ใช้แล้ว
+            usedImages.add(currentGameImage);
             
             // ตั้งค่าภาพพื้นหลัง
             const backgroundImage = document.getElementById('backgroundImage');
@@ -362,13 +405,19 @@
                 return;
             }
 
-            // เปิดช่อง
+            // เพิ่มเอฟเฟกต์ส่าย
             const tile = document.querySelector(`[data-index="${tileIndex}"]`);
-            tile.classList.add('revealed');
-            revealedTiles.add(tileIndex);
+            tile.classList.add('shake');
             
-            // สลับตาเดิน
-            switchTurn();
+            // รอให้แอนิเมชันส่ายเสร็จก่อนเปิดช่อง
+            setTimeout(() => {
+                tile.classList.remove('shake');
+                tile.classList.add('revealed');
+                revealedTiles.add(tileIndex);
+                
+                // สลับตาเดิน
+                switchTurn();
+            }, 500);
         }
 
         // ฟังก์ชันสลับตาเดิน
@@ -451,6 +500,5 @@
         // เริ่มเกมเมื่อโหลดหน้าเว็บ
         window.addEventListener('load', initializeGame);
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9968eee6d5348f09',t:'MTc2MTgwNjU1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9969a8a974f2826a',t:'MTc2MTgxNDE2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
